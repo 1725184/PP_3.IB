@@ -27,4 +27,14 @@ public class Philosopher extends Thread implements IPhilosopher {
         // TODO Auto-generated method stub
 
     }
+    
+    @Override
+    public void run(){
+    	// TODO
+    }
+    
+    @Override
+    public void start(){
+    	// TODO
+    }
 }
