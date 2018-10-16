@@ -1,5 +1,6 @@
 package io.dama.par.dining.cond;
 
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 public class Philosopher extends Thread implements IPhilosopher {
@@ -7,6 +8,10 @@ public class Philosopher extends Thread implements IPhilosopher {
     private Philosopher left;
     private Philosopher right;
     private Lock table;
+    private Condition canEat;
+    private Condition canNotEat;
+    // lock tables, give conditions
+    // whilst eating await to get right condition
     
     public Philosopher(){
     	
@@ -44,18 +49,7 @@ public class Philosopher extends Thread implements IPhilosopher {
     
     @Override
     public void start(){
-    	    	
-    	System.out.println(getId() + " starts eating.");
-    	
-    	if(getRight().isAlive()||getLeft().isAlive())
-			// das funktioniert noch nicht
-    		System.out.println(getId() + " is Interrupted.");
-    	
-    	while(getRight().isAlive()||getLeft().isAlive()){
-    			// das funktioniert noch nicht
-    	}
-    	
-    	System.out.println(getId() + " finished.");
+    	// TODO Either start eat or think
     }
 
 	public Philosopher getRight() {
@@ -64,5 +58,13 @@ public class Philosopher extends Thread implements IPhilosopher {
 
 	public Philosopher getLeft() {
 		return left;
+	}
+	
+	public void eat(){
+		// eating requires resources
+	}
+	
+	public void think(){
+		// thinking requires no resources and signals being free
 	}
 }
