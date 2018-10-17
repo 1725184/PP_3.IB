@@ -57,7 +57,7 @@ public class Philosopher extends Thread implements IPhilosopher {
 	}
 
 	private void think() throws InterruptedException {
-		System.out.println(this.getName() + "Gebe Signal");
+		System.out.println(this.getName() + " Gebe Signal");
 		Thread.sleep(this.random.nextInt(PhilosopherExperiment.MAX_THINKING_DURATION_MS));
 	}
 
@@ -70,82 +70,17 @@ public class Philosopher extends Thread implements IPhilosopher {
 				((Philosopher) left).isNotEating.await();
 				((Philosopher) right).isNotEating.await();
 			}
-			System.out.println(this.getName() + "Esse");
+			System.out.println(this.getName() + " Esse");
 			eating = true;
 			if (((Philosopher) left).eating || ((Philosopher) right).eating)
 				System.out.println("FEHLER");
 			this.eatCounter++;
 			Thread.sleep(PhilosopherExperiment.MAX_EATING_DURATION_MS);
-			System.out.println(this.getName() + "Beende Essen");
+			System.out.println(this.getName() + " Beende Essen");
 			eating = false;
 			this.isNotEating.signalAll();
 		} finally {
 			table.unlock();
 		}
 	}
-
-
-//
-//    private Philosopher left;
-//    private Philosopher right;
-//    private Lock table;
-//    private Condition canEat;
-//    private Condition canNotEat;
-//    // lock tables, give conditions
-//    // whilst eating await to get right condition
-//    
-//    public Philosopher(){
-//    	
-//    }
-//    
-//	@Override
-//    public void setLeft(final IPhilosopher left) {
-//        // TODO Auto-generated method stub
-//		this.left = (Philosopher) left;
-//    }
-//
-//    @Override
-//    public void setRight(final IPhilosopher right) {
-//        // TODO Auto-generated method stub
-//    	this.right = (Philosopher) right;
-//    }
-//
-//    @Override
-//    public void setTable(final Lock table) {
-//        // TODO Auto-generated method stub
-//    	this.table = table;
-//    }
-//
-//    @Override
-//    public void stopPhilosopher() {
-//        // TODO Auto-generated method stub
-//    	System.out.println(getId() + " forced to stop.");
-//    	this.interrupt();
-//    }
-//    
-//    @Override
-//    public void run(){
-//    	// TODO ?
-//    }
-//    
-//    @Override
-//    public void start(){
-//    	// TODO Either start eat or think
-//    }
-//
-//	public Philosopher getRight() {
-//		return right;
-//	}
-//
-//	public Philosopher getLeft() {
-//		return left;
-//	}
-//	
-//	public void eat(){
-//		// eating requires resources
-//	}
-//	
-//	public void think(){
-//		// thinking requires no resources and signals being free
-//	}
 }
